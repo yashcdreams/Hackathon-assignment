@@ -158,6 +158,7 @@ const UserFormComponent = () => {
                 name="userRole"
                 onChange={handleRoleChange}
               >
+                <option value="">Select</option>
                 {rolesOption?.map((role, index) => (
                   <option key={index} value={role.value}>
                     {role.label}

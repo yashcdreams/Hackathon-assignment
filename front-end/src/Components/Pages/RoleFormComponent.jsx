@@ -87,6 +87,7 @@ const RoleFormComponent = () => {
                   name="userRole"
                   onChange={(e) => setRoleStatus(e.target.value === "true")}
                 >
+                  <option value="">Select</option>
                   {status.map((val, index) => (
                     <option key={index} value={val.value}>
                       {val.label}
