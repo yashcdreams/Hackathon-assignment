@@ -1,11 +1,11 @@
 import { faUserShield } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { Button, Container, Tab } from "react-bootstrap";
+import { Container, Tab } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteRoleById, getRolesApi } from "../../apis/role-apis";
 import TableComponent from "../Atoms/TableComponent";
-import ActionModal from "../Atoms/Modal";
+import ActionModal from "../Atoms/ModalComponent";
 
 const RoleListComponent = () => {
   const [rows, setRows] = useState([]);
@@ -13,7 +13,7 @@ const RoleListComponent = () => {
   const [showModal, setShowModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
   const handleCloseModal = () => setShowModal(false);
-  // Updated columnHeader to use label and value
+
   const columnHeader = [
     { label: "ID", value: "id" },
     { label: "Role Name", value: "name" },

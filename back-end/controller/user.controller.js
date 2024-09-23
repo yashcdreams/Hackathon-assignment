@@ -1,5 +1,4 @@
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import userModel from "../model/user.Model.js";
 import {
   BAD_REQUEST,
@@ -11,6 +10,7 @@ import {
   UNAUTHORIZED,
 } from "../utils/Constants.js";
 import sendResponse from "../utils/response.processor.js";
+import { generateToken } from "../utils/jwt.js";
 
 const jwtSecretKey = "digitalflake";
 
@@ -76,9 +76,7 @@ export const loginUser = async (req, res) => {
   try {
     const { email } = req.body;
     const password = atob(req.body.password);
-    const existingUser = await userModel.findOne({
-      email: email,
-    });
+    const existingUser = await userModel.findOne({ email });
 
     if (existingUser) {
       const isPasswordValid = await bcrypt.compare(
@@ -86,14 +84,12 @@ export const loginUser = async (req, res) => {
         existingUser.password
       );
       if (isPasswordValid) {
-        const token = jwt.sign(
-          {
-            userId: existingUser._id,
-            email: existingUser.email,
-          },
-          jwtSecretKey,
-          { expiresIn: "1d" }
+        const token = generateToken(
+          existingUser._id,
+          existingUser.email,
+          jwtSecretKey
         );
+
         sendResponse(req, res, OK, "User logged in successfully", {
           user: existingUser,
           token,
@@ -105,16 +101,12 @@ export const loginUser = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const newUser = new userModel({
-        email: email,
+        email,
         password: hashedPassword,
       });
       await newUser.save();
 
-      const token = jwt.sign(
-        { userId: newUser._id, email: newUser.email },
-        jwtSecretKey,
-        { expiresIn: "1d" }
-      );
+      const token = generateToken(newUser._id, newUser.email, jwtSecretKey);
 
       sendResponse(req, res, CREATED, "User created & logged in successfully", {
         user: newUser,
@@ -122,8 +114,8 @@ export const loginUser = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
-    sendResponse(req, res, NOT_FOUND, "Error login User");
+    console.error(err);
+    sendResponse(req, res, NOT_FOUND, "Error logging in User");
   }
 };
 

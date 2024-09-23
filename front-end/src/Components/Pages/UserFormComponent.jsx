@@ -154,7 +154,7 @@ const UserFormComponent = () => {
               <Form.Label>Role</Form.Label>
               <Form.Control
                 as="select"
-                value={userData.userRole?.value || ""} // Ensure the value is tied to userRole.value
+                value={userData.userRole?.value || ""}
                 name="userRole"
                 onChange={handleRoleChange}
               >

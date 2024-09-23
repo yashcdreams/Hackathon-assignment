@@ -1,19 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from "./Components/Pages/LoginPage";
-import ForgotPasswordPage from "./Components/Pages/ForgotPasswordPage";
-import MainComponent from "./Components/Layout/Main";
+import ForgotPasswordComponent from "./Components/Pages/ForgotPasswordComponent";
 import HomeComponent from "./Components/Pages/HomeComponent";
 import RoleListComponent from "./Components/Pages/RoleListComponent";
 import RoleFormComponent from "./Components/Pages/RoleFormComponent";
 import UserFormComponent from "./Components/Pages/UserFormComponent";
 import UserListComponent from "./Components/Pages/UserListComponent";
+import LoginComponent from "./Components/Pages/LoginComponent";
+import MainComponent from "./Components/Layout/MainComponent";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" Component={LoginPage} />
-        <Route path="/forgot-password" Component={ForgotPasswordPage} />
+        <Route path="/" Component={LoginComponent} />
+        <Route path="/forgot-password" Component={ForgotPasswordComponent} />
         <Route path="/" Component={MainComponent}>
           <Route path="/home" Component={HomeComponent} />
           <Route path="/roles" Component={RoleListComponent} />

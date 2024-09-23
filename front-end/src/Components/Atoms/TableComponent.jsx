@@ -7,7 +7,7 @@ const TableComponent = ({ columnHeader, rows }) => {
       <thead>
         <tr>
           {columnHeader.map((header, index) => (
-            <th key={index}>{header.label}</th> // Display the label
+            <th key={index}>{header.label}</th>
           ))}
         </tr>
       </thead>
@@ -15,7 +15,7 @@ const TableComponent = ({ columnHeader, rows }) => {
         {rows.map((row, index) => (
           <tr key={index}>
             {columnHeader.map((header, colIndex) => (
-              <td key={colIndex}>{row[header.value]}</td> // Dynamically access the row value
+              <td key={colIndex}>{row[header.value]}</td>
             ))}
           </tr>
         ))}

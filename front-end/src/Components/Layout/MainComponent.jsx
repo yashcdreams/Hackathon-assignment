@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Sidebar from "./Sidebar"; // Assuming Sidebar is in the same directory
-import NavbarComponent from "./Navbar";
+import Sidebar from "./SidebarComponent";
+import NavbarComponent from "./NavbarComponent";
 import { Outlet } from "react-router-dom";
 
 const MainComponent = () => {

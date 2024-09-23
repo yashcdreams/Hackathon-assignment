@@ -12,9 +12,28 @@ a {
 .navbar {
   background-color: #662671;
 }
+
 .login-link {
   text-decoration: underline;
   color: black;
+}
+
+.home-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  position: relative;
+}
+
+.home-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.home-text {
+  text-align: center;
 }
 
 .icon {
@@ -27,23 +46,6 @@ a {
 
 .list-group-item.active {
   background-color: #f4edaf;
-}
-
-.role-btn {
-  position: relative;
-  bottom: 0%;
-}
-
-.custom-input {
-  border-radius: 25px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border: 1px solid #ccc;
-}
-
-.custom-input:focus {
-  border-color: #86b7fe;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
 }
 
 .back-arrow {

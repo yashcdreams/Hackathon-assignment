@@ -5,7 +5,7 @@ import { Container, Tab } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import TableComponent from "../Atoms/TableComponent";
 import { deleteUserById, getUsersApi } from "../../apis/user-api";
-import ActionModal from "../Atoms/Modal"; // Import the reusable modal
+import ActionModal from "../Atoms/ModalComponent";
 
 const UserListComponent = () => {
   const [rows, setRows] = useState([]);

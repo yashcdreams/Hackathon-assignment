@@ -1,13 +1,13 @@
 const HomeComponent = () => {
   return (
     <>
-      <div className="align-items-center justify-content-center">
+      <div className="home-div">
         <img
           src="./images/image.png"
           alt="Digitalflake Logo"
-          className="img-fluid"
+          className="home-img"
         />
-        <h4 className="ms-3">Welcome to Digitalflake Admin</h4>
+        <h4 className="home-text">Welcome to Digitalflake Admin</h4>
       </div>
     </>
   );

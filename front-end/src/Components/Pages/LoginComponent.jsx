@@ -3,7 +3,7 @@ import { Button, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { userLoginApi } from "../../apis/user-api";
 
-const LoginPage = () => {
+const LoginComponent = () => {
   const [validated, setValidated] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
@@ -91,4 +91,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginComponent;

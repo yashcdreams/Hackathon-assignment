@@ -1,7 +1,7 @@
 import { Button, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const ForgotPasswordPage = () => {
+const ForgotPasswordComponent = () => {
   return (
     <Container fluid className="login">
       <h2>Did you forget your password?</h2>
@@ -24,4 +24,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default ForgotPasswordPage;
+export default ForgotPasswordComponent;
