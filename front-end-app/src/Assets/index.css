@@ -1,0 +1,63 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+.login {
+  align-self: center;
+  padding: 10% 30%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar {
+  background-color: #662671;
+}
+
+.login-link {
+  text-decoration: underline;
+  color: black;
+}
+
+.home-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  position: relative;
+}
+
+.home-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.home-text {
+  text-align: center;
+}
+
+.icon {
+  margin-right: 10px;
+  height: 25px;
+}
+.list-group {
+  background-color: #f8f9fa;
+}
+
+.list-group-item.active {
+  background-color: #f4edaf;
+}
+
+.back-arrow {
+  font-size: 24px;
+  text-decoration: none;
+  color: #6b127d;
+  margin-right: 10px;
+  padding-bottom: 10px;
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}

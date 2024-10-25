@@ -16,31 +16,7 @@ const jwtSecretKey = "digitalflake";
 
 export const getUsers = async (req, res) => {
   try {
-    const users = await userModel.aggregate([
-      {
-        $lookup: {
-          from: "UserRoles",
-          localField: "roleId",
-          foreignField: "_id",
-          as: "userRole",
-        },
-      },
-      {
-        $unwind: {
-          path: "$userRole",
-          preserveNullAndEmptyArrays: true,
-        },
-      },
-      {
-        $project: {
-          name: 1,
-          email: 1,
-          mobile: 1,
-          status: 1,
-          userRole: "$userRole.roleName",
-        },
-      },
-    ]);
+    const users = await userModel.find().populate("roleId", "roleName");
     sendResponse(req, res, OK, "User received successfully", users);
   } catch (err) {
     console.log(err);
@@ -54,9 +30,7 @@ export const getUser = async (req, res) => {
       return sendResponse(req, res, BAD_REQUEST, "User ID is required");
     }
 
-    const existingUser = await userModel
-      .findById(req.params.id)
-      .populate("roleId", "roleName");
+    const existingUser = await userModel.findById(req.params.id).populate("roleId", "roleName");
 
     if (existingUser) {
       const response = {
@@ -79,21 +53,11 @@ export const loginUser = async (req, res) => {
     const existingUser = await userModel.findOne({ email });
 
     if (existingUser) {
-      const isPasswordValid = await bcrypt.compare(
-        password,
-        existingUser.password
-      );
+      const isPasswordValid = await bcrypt.compare(password, existingUser.password);
       if (isPasswordValid) {
-        const token = generateToken(
-          existingUser._id,
-          existingUser.email,
-          jwtSecretKey
-        );
+        const token = generateToken(existingUser._id, existingUser.email, jwtSecretKey);
 
-        sendResponse(req, res, OK, "User logged in successfully", {
-          user: existingUser,
-          token,
-        });
+        sendResponse(req, res, OK, "User logged in successfully", { user: existingUser, token });
       } else {
         sendResponse(req, res, UNAUTHORIZED, "Enter a valid password");
       }
@@ -153,25 +117,15 @@ export const updateUser = async (req, res) => {
       if (reqBody.mobile && reqBody.mobile !== existingUser.mobile) {
         updates.mobile = reqBody.mobile;
       }
-      if (
-        reqBody.userRole &&
-        reqBody.userRole.value !== existingUser.userRole.toString()
-      ) {
+      if (reqBody.userRole && reqBody.userRole.value !== existingUser.userRole.toString()) {
         updates.userRole = reqBody.userRole.value;
       }
-      if (
-        typeof reqBody.status !== "undefined" &&
-        reqBody.status !== existingUser.status
-      ) {
+      if (typeof reqBody.status !== "undefined" && reqBody.status !== existingUser.status) {
         updates.status = reqBody.status;
       }
 
       if (Object.keys(updates).length > 0) {
-        await userModel.findOneAndUpdate(
-          { _id: existingUser._id },
-          { $set: updates },
-          { new: true }
-        );
+        await userModel.findOneAndUpdate({ _id: existingUser._id }, { $set: updates }, { new: true });
         sendResponse(req, res, OK, "User Updated Successfully");
       } else {
         sendResponse(req, res, OK, "No changes detected");
