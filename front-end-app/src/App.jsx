@@ -7,6 +7,7 @@ import RoleListComponent from "./Components/Pages/RoleListComponent";
 import RoleFormComponent from "./Components/Pages/RoleFormComponent";
 import UserFormComponent from "./Components/Pages/UserFormComponent";
 import UserListComponent from "./Components/Pages/UserListComponent";
+import "./Assets/index.css";
 
 const App = () => {
   return (
